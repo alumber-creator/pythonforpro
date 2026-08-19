@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>{{ course.title }}</span>
+</nav>
+
+<section class="course-header">
+    <div class="course-header-icon">{{ course.icon }}</div>
+    <h1>{{ course.title }}</h1>
+    <p class="course-header-desc">{{ course.description }}</p>
+    <div class="course-header-meta">
+        <span class="badge badge-level">{{ course.level }}</span>
+        <span class="badge badge-duration">{{ course.duration }}</span>
+        <span class="badge badge-lessons">{{ lessons|length }} уроков</span>
+    </div>
+</section>
+
+<section class="lessons-list">
+    <h2 class="section-title">Уроки</h2>
+    <ol class="lesson-items">
+        {% for l in lessons %}
+        <li class="lesson-item">
+            <a href="{{ url_for('lesson', course_slug=course.slug, lesson_slug=l.slug) }}" class="lesson-link">
+                <span class="lesson-num">{{ loop.index }}</span>
+                <div class="lesson-info">
+                    <span class="lesson-title">{{ l.title }}</span>
+                    {% if l.objective %}
+                    <span class="lesson-objective">{{ l.objective }}</span>
+                    {% endif %}
+                </div>
+                {% if l.tags %}
+                <div class="lesson-tags">
+                    {% for tag in l.tags %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ol>
+</section>
+{% endblock %}

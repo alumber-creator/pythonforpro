@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">{{ site_title }}</h1>
+        <p class="hero-subtitle">{{ site_subtitle }}</p>
+        <p class="hero-desc">
+            Интерактивные курсы для опытных программистов, которые хотят освоить Python
+            как выразительный, мощный и профессиональный инструмент. Не учим основам
+            программирования — показываем, чем Python уникален.
+        </p>
+        <div class="hero-stats">
+            <div class="stat"><span class="stat-num">{{ courses|length }}</span><span>курсов</span></div>
+            <div class="stat"><span class="stat-num">39+</span><span>уроков</span></div>
+            <div class="stat"><span class="stat-num">7</span><span>тем</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="courses-section">
+    <h2 class="section-title">Выберите курс</h2>
+    <div class="courses-grid">
+        {% for c in courses %}
+        <a href="{{ url_for('course', course_slug=c.slug) }}" class="course-card">
+            <div class="course-card-icon">{{ c.icon }}</div>
+            <div class="course-card-body">
+                <h3 class="course-card-title">{{ c.title }}</h3>
+                <p class="course-card-desc">{{ c.description }}</p>
+                <div class="course-card-meta">
+                    <span class="badge badge-level">{{ c.level }}</span>
+                    <span class="badge badge-duration">{{ c.duration }}</span>
+                    <span class="badge badge-lessons">{{ c.lesson_count }} уроков</span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="features-section">
+    <h2 class="section-title">Почему этот сайт?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Для опытных</h3>
+            <p>Никаких «Hello, World!» и объяснений циклов. Сразу к делу: идиомы, продвинутые фичи и экосистема.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3>Сравнение языков</h3>
+            <p>Каждый урок показывает, как та же задача решается в Java, C++, JavaScript — и почему Python элегантнее.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💻</div>
+            <h3>Живой код</h3>
+            <p>Все примеры соответствуют PEP 8 и Zen of Python. Подсветка синтаксиса, копирование в один клик.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🏗️</div>
+            <h3>Практика</h3>
+            <p>Каждый урок содержит задание. От рефакторинга до реализации продвинутых паттернов.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

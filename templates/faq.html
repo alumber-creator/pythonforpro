@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}FAQ{% endblock %}
+{% block content %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>FAQ</span>
+</nav>
+
+<article class="static-page">
+    <h1>❓ Часто задаваемые вопросы</h1>
+
+    <details class="faq-item" open>
+        <summary class="faq-question">Для кого эти курсы?</summary>
+        <div class="faq-answer">
+            <p>Для опытных программистов, которые уже владеют хотя бы одним языком (Java, C++, JavaScript, C#, Go, Rust и т.п.) и хотят быстро и глубоко освоить Python. Мы не объясняем, что такое цикл или переменная — мы показываем, чем Python отличается и как использовать его уникальные возможности.</p>
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary class="faq-question">Чем этот сайт отличается от других курсов по Python?</summary>
+        <div class="faq-answer">
+            <p>Большинство курсов ориентированы на новичков в программировании. Здесь же:</p>
+            <ul>
+                <li>Фокус на идиоматическом Python, а не на основах программирования.</li>
+                <li>Сравнение с Java, C++, JavaScript в каждом уроке.</li>
+                <li>Акцент на «почему», а не только на «как».</li>
+                <li>Продвинутые темы: дескрипторы, метаклассы, async/await, C-расширения.</li>
+                <li>Весь код соответствует PEP 8 и Zen of Python.</li>
+            </ul>
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary class="faq-question">Нужно ли знать Python, чтобы начать?</summary>
+        <div class="faq-answer">
+            <p>Нет. Курс «Python для профессионалов: Быстрый старт» проведёт вас от установки до уверенного владения базовым синтаксисом за 5 уроков. Если вы уже знаете Python, начните с «Идиоматического Python».</p>
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary class="faq-question">Какой порядок прохождения курсов?</summary>
+        <div class="faq-answer">
+            <p>Рекомендуемый порядок:</p>
+            <ol>
+                <li><strong>Python для профессионалов: Быстрый старт</strong> — если вы новичок в Python.</li>
+                <li><strong>Идиоматический Python</strong> — пишите код как настоящий Python-разработчик.</li>
+                <li><strong>Инструменты и экосистема</strong> — настройте рабочее окружение.</li>
+                <li><strong>Качество кода и тестирование</strong> — профессиональный подход.</li>
+                <li><strong>Продвинутые возможности</strong> — декораторы, метаклассы, дескрипторы.</li>
+                <li><strong>Асинхронный Python</strong> — конкурентность без потоков.</li>
+                <li><strong>Производительность и оптимизация</strong> — выжмите максимум.</li>
+            </ol>
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary class="faq-question">Бесплатно ли это?</summary>
+        <div class="faq-answer">
+            <p>Да, все материалы полностью бесплатны и открыты. Вы можете запустить этот сайт локально (см. README) или использовать публичную версию.</p>
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary class="faq-question">Как добавить свой урок или курс?</summary>
+        <div class="faq-answer">
+            <p>Ознакомьтесь со <a href="{{ url_for('format_doc') }}">страницей формата уроков</a>. Создайте Markdown-файл с YAML front matter, поместите его в нужную папку в <code>lessons/</code> — сервер автоматически подхватит его при перезапуске.</p>
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary class="faq-question">Какие версии Python рассматриваются?</summary>
+        <div class="faq-answer">
+            <p>Основной фокус на Python 3.11+, с упоминанием новых возможностей Python 3.12 и 3.13. Python 2 не рассматривается вообще.</p>
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary class="faq-question">Есть ли поддержка других языков интерфейса?</summary>
+        <div class="faq-answer">
+            <p>Пока интерфейс только на русском. Контент уроков на русском с английскими терминами и примерами кода.</p>
+        </div>
+    </details>
+</article>
+{% endblock %}

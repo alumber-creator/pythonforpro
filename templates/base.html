@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Python for Professionals — интерактивные курсы по Python для опытных программистов">
+    <title>{% block title %}{{ site_title }}{% endblock %} — {{ site_title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-logo" aria-label="Главная страница">
+                <span class="logo-icon">🐍</span>
+                <span class="logo-text">{{ site_title }}</span>
+            </a>
+            <button class="nav-toggle" aria-label="Меню" aria-expanded="false" onclick="toggleMenu()">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links" id="navLinks" role="menubar">
+                <li role="none"><a href="{{ url_for('index') }}" role="menuitem">Курсы</a></li>
+                <li role="none"><a href="{{ url_for('best_practices') }}" role="menuitem">Best Practices</a></li>
+                <li role="none"><a href="{{ url_for('blog') }}" role="menuitem">Блог</a></li>
+                <li role="none"><a href="{{ url_for('faq') }}" role="menuitem">FAQ</a></li>
+                <li role="none"><a href="{{ url_for('format_doc') }}" role="menuitem">Формат</a></li>
+                <li role="none">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Переключить тему" title="Переключить светлую/тёмную тему">
+                        <span class="theme-icon-dark">🌙</span>
+                        <span class="theme-icon-light">☀️</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>{{ site_title }}</h4>
+                <p>{{ site_subtitle }}</p>
+            </div>
+            <div class="footer-col">
+                <h4>Курсы</h4>
+                <ul>
+                    {% for c in all_courses %}
+                    <li><a href="{{ url_for('course', course_slug=c.slug) }}">{{ c.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ссылки</h4>
+                <ul>
+                    <li><a href="{{ url_for('best_practices') }}">Best Practices</a></li>
+                    <li><a href="{{ url_for('blog') }}">Блог</a></li>
+                    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+                    <li><a href="{{ url_for('format_doc') }}">Формат уроков</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {{ current_year }} {{ site_title }}. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

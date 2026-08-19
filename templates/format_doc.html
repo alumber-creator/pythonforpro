@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Формат уроков{% endblock %}
+{% block content %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>Формат уроков</span>
+</nav>
+
+<article class="static-page">
+    <h1>📄 Формат файлов уроков</h1>
+    <p class="lead">Каждый урок — это Markdown-файл с YAML front matter. Сервер автоматически сканирует папки и строит навигацию.</p>
+
+    <section>
+        <h2>Структура каталога</h2>
+        <div class="code-block-wrapper"><pre><code class="language-text">lessons/
+├── python-fast-track/          # slug курса
+│   ├── 01-why-python.md        # 01-префикс задаёт порядок
+│   ├── 02-syntax-basics.md
+│   └── ...
+├── idiomatic-python/
+│   ├── 01-zen-of-python.md
+│   └── ...
+└── ...</code></pre></div>
+    </section>
+
+    <section>
+        <h2>YAML Front Matter</h2>
+        <p>Каждый файл начинается с блока YAML между <code>---</code>:</p>
+        <div class="code-block-wrapper"><pre><code class="language-yaml">---
+title: "Идиоматический Python: Comprehensions"
+order: 2
+tags: ["comprehensions", "list", "dict", "set"]
+prerequisites: "Базовый синтаксис Python, циклы, функции"
+objective: "Научиться заменять циклы на comprehensions для читаемого и быстрого кода"
+---</code></pre></div>
+
+        <h3>Поля front matter</h3>
+        <table>
+            <thead><tr><th>Поле</th><th>Обязательное</th><th>Описание</th></tr></thead>
+            <tbody>
+                <tr><td><code>title</code></td><td>Да</td><td>Название урока. Также используется для генерации slug.</td></tr>
+                <tr><td><code>order</code></td><td>Нет</td><td>Порядок урока в курсе (целое число). Если не указан, используется числовой префикс имени файла.</td></tr>
+                <tr><td><code>tags</code></td><td>Нет</td><td>Список тегов для фильтрации и поиска.</td></tr>
+                <tr><td><code>prerequisites</code></td><td>Рекомендуется</td><td>Что нужно знать перед уроком.</td></tr>
+                <tr><td><code>objective</code></td><td>Рекомендуется</td><td>Цель урока — что слушатель сможет делать после.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Структура урока (Markdown)</h2>
+        <p>Рекомендуемая структура контента после front matter:</p>
+        <div class="code-block-wrapper"><pre><code class="language-markdown">## Введение
+Краткое введение в тему.
+
+## Основная часть
+### Подраздел 1
+Объяснение первой концепции.
+
+### Сравнение с другими языками
+| Python | Java | JavaScript |
+|--------|------|-------------|
+| ...    | ...  | ...         |
+
+### Анти-паттерны
+```python
+# ❌ Так делать не надо
+...
+```
+
+### Идиоматичный код
+```python
+# ✅ А так — правильно
+...
+```
+
+## Практическое задание
+1. Задача 1
+2. Задача 2
+
+## Дополнительные материалы
+- [PEP 8](https://peps.python.org/pep-0008/)
+- ...</code></pre></div>
+    </section>
+
+    <section>
+        <h2>Подсветка кода</h2>
+        <p>Используйте fenced code blocks с указанием языка. Поддерживаются все языки, известные Pygments:</p>
+        <div class="code-block-wrapper"><pre><code class="language-markdown">```python
+def hello():
+    print("Hello, World!")
+```
+
+```java
+public static void main(String[] args) {
+    System.out.println("Hello");
+}
+```
+
+```javascript
+const hello = () => console.log("Hello");
+```</code></pre></div>
+    </section>
+
+    <section>
+        <h2>Добавление нового курса</h2>
+        <ol>
+            <li>Создайте папку в <code>lessons/</code> с slug-именем курса (например, <code>my-course</code>).</li>
+            <li>Добавьте Markdown-файлы уроков с YAML front matter.</li>
+            <li>Добавьте запись о курсе в список <code>COURSES</code> в <code>app.py</code>.</li>
+            <li>Перезапустите сервер.</li>
+        </ol>
+    </section>
+</article>
+{% endblock %}
