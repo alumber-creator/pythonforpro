@@ -25,7 +25,7 @@
 
 ```bash
 # 1. Клонируйте репозиторий
-git clone <repo-url> python-course
+git clone https://github.com/alumber-creator/pythonforpro.git python-course
 cd python-course
 
 # 2. Создайте виртуальное окружение
